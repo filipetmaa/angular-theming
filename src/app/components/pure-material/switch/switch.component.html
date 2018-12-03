@@ -1,0 +1,4 @@
+<label class="pure-material-switch" [attr.style]="componentStyle">
+    <input type="checkbox" [checked]="isChecked" [disabled]="hasDisabled" (click)="this.isClicked.emit()">
+    <span>{{name}}</span>
+</label>

@@ -1,0 +1,947 @@
+<div theme id="container" #vc>
+    <header>
+        <app-button-fab [themeVariable]="'--secondary'" [materialIcon]="'keyboard_arrow_left'" (isClicked)="prevTheme()"></app-button-fab>
+        {{title}} THEME
+        <app-button-fab [themeVariable]="'--secondary'" [materialIcon]="'keyboard_arrow_right'" (isClicked)="nextTheme()"></app-button-fab>
+    </header>
+    <div class="theming" [ngClass]="{ hidden: !slidersVisibility }">
+        <app-switch id="toggle" [name]="'Colors'" (isClicked)="toggleTheming()"></app-switch>
+        <label class="pure-material-slider color-gradient">
+            <input #primary type="range" min="0" max="360" [value]="this.sliderValue['--primary']" (input)="updateColor(primary.value, '--primary')">
+            <span>Primary</span>
+        </label>
+        <label class="pure-material-slider color-gradient">
+            <input #primaryVariant type="range" min="0" max="360" [value]="this.sliderValue['--primary-variant']" style="--primary: var(--primary-variant);"
+                (input)="updateColor(primaryVariant.value, '--primary-variant')">
+            <span>Primary Variant</span>
+        </label>
+        <label class="pure-material-slider">
+            <input #onPrimary type="range" min="0" max="255" [value]="this.sliderValue['--on-primary']" style="--primary: var(--on-primary);"
+                (input)="updateColor(onPrimary.value, '--on-primary', 'shade')">
+            <span>On Primary</span>
+        </label>
+        <label class="pure-material-slider color-gradient">
+            <input #secondary type="range" min="0" max="360" [value]="this.sliderValue['--secondary']" style="--primary: var(--secondary);"
+                (input)="updateColor(secondary.value, '--secondary')">
+            <span>Secondary</span>
+        </label>
+        <label class="pure-material-slider color-gradient">
+            <input #secondaryVariant type="range" min="0" max="360" [value]="this.sliderValue['--secondary-variant']"
+                style="--primary: var(--secondary-variant);" (input)="updateColor(secondaryVariant.value, '--secondary-variant')">
+            <span>Secondary Variant</span>
+        </label>
+        <label class="pure-material-slider">
+            <input #onSecondary type="range" min="0" max="255" [value]="this.sliderValue['--on-secondary']" style="--primary: var(--on-secondary);"
+                (input)="updateColor(onSecondary.value, '--on-secondary', 'shade')">
+            <span>On Secondary</span>
+        </label>
+        <label class="pure-material-slider">
+            <input #background type="range" min="0" max="255" [value]="this.sliderValue['--background']" style="--primary: var(--background);"
+                (input)="updateColor(background.value, '--background', 'shade')">
+            <span>Background</span>
+        </label>
+        <label class="pure-material-slider">
+            <input #onBackground type="range" min="0" max="255" [value]="this.sliderValue['--on-background']" style="--primary: var(--on-background);"
+                (input)="updateColor(onBackground.value, '--on-background', 'shade')">
+            <span>On Background</span>
+        </label>
+        <label class="pure-material-slider">
+            <input #surface type="range" min="0" max="255" [value]="this.sliderValue['--surface']" style="--primary: var(--surface);"
+                (input)="updateColor(surface.value, '--surface', 'shade')">
+            <span>Surface</span>
+        </label>
+        <label class="pure-material-slider">
+            <input #onSurface type="range" min="0" max="255" [value]="this.sliderValue['--on-surface']" style="--primary: var(--on-surface);"
+                (input)="updateColor(onSurface.value, '--on-surface', 'shade')">
+            <span>On Surface</span>
+        </label>
+
+        <label class="pure-material-slider color-gradient">
+            <input #error type="range" min="0" max="360" [value]="this.sliderValue['--error']" style="--primary: var(--error);"
+                (input)="updateColor(error.value, '--error')">
+            <span>Error</span>
+        </label>
+        <label class="pure-material-slider">
+            <input #onError type="range" min="0" max="255" [value]="this.sliderValue['--on-error']" style="--primary: var(--on-error);"
+                (input)="updateColor(onError.value, '--on-error', 'shade')">
+            <span>On Error</span>
+        </label>
+    </div>
+
+    <main class="grid" [ngClass]="{ pushed: slidersVisibility }">
+        <div></div>
+        <div>
+            <div class="column">Primary</div>
+            <div class="column" style="--primary: var(--primary-light);">Primary Light</div>
+            <div class="column" style="--primary: var(--primary-dark);">Primary Dark</div>
+            <div class="column" style="--primary: var(--primary-variant);">Primary Variant</div>
+            <div class="column" style="--primary: var(--secondary);--on-primary: var(--on-secondary);">Secondary</div>
+            <div class="column" style="--primary: var(--secondary-light);--on-primary: var(--on-secondary);">Secondary
+                Light</div>
+            <div class="column" style="--primary: var(--secondary-dark);--on-primary: var(--on-secondary);">Secondary
+                Dark</div>
+            <div class="column" style="--primary: var(--secondary-variant);--on-primary: var(--on-secondary);">Secondary
+                Variant</div>
+            <div class="column" style="--primary: var(--error);--on-primary: var(--on-error);">Error</div>
+            <div class="column" style="--primary: var(--on-background);">Disabled</div>
+        </div>
+
+        <div class="title">Button - Contained</div>
+        <div class="pure-material-card">
+            <ng-container *ngFor="let themeVariable of themeVariableArray">
+                <app-button-contained [themeVariable]="themeVariable"></app-button-contained>
+            </ng-container>
+            <app-button-contained [themeVariable]="themeVariable" [hasDisabled]="true"></app-button-contained>
+        </div>
+
+        <div class="title">Button - Outlined</div>
+        <div class="pure-material-card">
+            <ng-container *ngFor="let themeVariable of themeVariableArray">
+                <app-button-outlined [themeVariable]="themeVariable"></app-button-outlined>
+            </ng-container>
+            <app-button-outlined [themeVariable]="themeVariable" [hasDisabled]="true"></app-button-outlined>
+        </div>
+
+        <div class="title">Button - Text</div>
+        <div class="pure-material-card">
+            <ng-container *ngFor="let themeVariable of themeVariableArray">
+                <app-button-text [themeVariable]="themeVariable"></app-button-text>
+            </ng-container>
+            <app-button-text [themeVariable]="themeVariable" [hasDisabled]="true"></app-button-text>
+        </div>
+
+        <div class="title">Button - FAB</div>
+        <div class="pure-material-card">
+            <ng-container *ngFor="let themeVariable of themeVariableArray">
+                <app-button-fab [themeVariable]="themeVariable" [materialIcon]="'palette'"></app-button-fab>
+            </ng-container>
+            <app-button-fab [themeVariable]="themeVariable" [materialIcon]="'palette'" [hasDisabled]="true"></app-button-fab>
+        </div>
+
+        <div class="title">Checkbox</div>
+        <div class="pure-material-card">
+            <div class="checkboxes" *ngFor="let themeVariable of themeVariableArray">
+                <app-checkbox [themeVariable]="themeVariable" [name]="'Unchecked'"></app-checkbox>
+                <app-checkbox [themeVariable]="themeVariable" [name]="'Checked'" [state]="'checked'"></app-checkbox>
+                <app-checkbox [themeVariable]="themeVariable" [name]="'Indeterminate'" [state]="'indeterminate'"></app-checkbox>
+            </div>
+            <div class="checkboxes">
+                <app-checkbox [themeVariable]="themeVariable" [name]="'Unchecked'" [hasDisabled]="true"></app-checkbox>
+                <app-checkbox [themeVariable]="themeVariable" [name]="'Checked'" [state]="'checked'" [hasDisabled]="true"></app-checkbox>
+                <app-checkbox [themeVariable]="themeVariable" [name]="'Indeterminate'" [state]="'indeterminate'"
+                    [hasDisabled]="true"></app-checkbox>
+            </div>
+        </div>
+
+        <div class="title">Radio Buttons</div>
+        <div class="pure-material-card">
+            <div class="radios" *ngFor="let themeVariable of themeVariableArray">
+                <app-radio [themeVariable]="themeVariable" [name]="'Unchecked'" [groupName]="themeVariable"></app-radio>
+                <app-radio [themeVariable]="themeVariable" [name]="'Checked'" [isChecked]="true" [groupName]="themeVariable"></app-radio>
+            </div>
+            <div class="radios">
+                <app-radio [themeVariable]="themeVariable" [name]="'Unchecked'" [groupName]="themeVariable"
+                    [hasDisabled]="true"></app-radio>
+                <app-radio [themeVariable]="themeVariable" [name]="'Checked'" [isChecked]="true" [groupName]="themeVariable"
+                    [hasDisabled]="true"></app-radio>
+            </div>
+        </div>
+
+        <div class="title">Switch</div>
+        <div class="pure-material-card">
+            <div class="switches" *ngFor="let themeVariable of themeVariableArray">
+                <app-switch [themeVariable]="themeVariable" [name]="'Off'"></app-switch>
+                <br />
+                <app-switch [themeVariable]="themeVariable" [name]="'On'" [isChecked]="true"></app-switch>
+            </div>
+            <div class="switches">
+                <app-switch [themeVariable]="themeVariable" [name]="'Off'" [hasDisabled]="true"></app-switch>
+                <br />
+                <app-switch [themeVariable]="themeVariable" [name]="'On'" [isChecked]="true" [hasDisabled]="true"></app-switch>
+            </div>
+
+            <!-- <div class="switches" style="--primary: var(--primary-light);">
+                <label class="pure-material-switch">
+                    <input type="checkbox">
+                    <span>Off</span>
+                </label>
+                <br />
+                <label class="pure-material-switch">
+                    <input type="checkbox" checked>
+                    <span>On</span>
+                </label>
+            </div>
+            <div class="switches">
+                <label class="pure-material-switch">
+                    <input type="checkbox">
+                    <span>Off</span>
+                </label>
+                <br />
+                <label class="pure-material-switch">
+                    <input type="checkbox" checked>
+                    <span>On</span>
+                </label>
+            </div>
+            <div class="switches" style="--primary: var(--primary-dark);">
+                <label class="pure-material-switch">
+                    <input type="checkbox">
+                    <span>Off</span>
+                </label>
+                <br />
+                <label class="pure-material-switch">
+                    <input type="checkbox" checked>
+                    <span>On</span>
+                </label>
+            </div>
+            <div class="switches" style="--primary: var(--primary-variant);">
+                <label class="pure-material-switch">
+                    <input type="checkbox">
+                    <span>Off</span>
+                </label>
+                <br />
+                <label class="pure-material-switch">
+                    <input type="checkbox" checked>
+                    <span>On</span>
+                </label>
+            </div>
+            <div class="switches" style="--primary: var(--secondary-light);--on-primary: var(--on-secondary);">
+                <label class="pure-material-switch">
+                    <input type="checkbox">
+                    <span>Off</span>
+                </label>
+                <br />
+                <label class="pure-material-switch">
+                    <input type="checkbox" checked>
+                    <span>On</span>
+                </label>
+            </div>
+            <div class="switches" style="--primary: var(--secondary);--on-primary: var(--on-secondary);">
+                <label class="pure-material-switch">
+                    <input type="checkbox">
+                    <span>Off</span>
+                </label>
+                <br />
+                <label class="pure-material-switch">
+                    <input type="checkbox" checked>
+                    <span>On</span>
+                </label>
+            </div>
+            <div class="switches" style="--primary: var(--secondary-dark);--on-primary: var(--on-secondary);">
+                <label class="pure-material-switch">
+                    <input type="checkbox">
+                    <span>Off</span>
+                </label>
+                <br />
+                <label class="pure-material-switch">
+                    <input type="checkbox" checked>
+                    <span>On</span>
+                </label>
+            </div>
+            <div class="switches" style="--primary: var(--secondary-variant);--on-primary: var(--on-secondary);">
+                <label class="pure-material-switch">
+                    <input type="checkbox">
+                    <span>Off</span>
+                </label>
+                <br />
+                <label class="pure-material-switch">
+                    <input type="checkbox" checked>
+                    <span>On</span>
+                </label>
+            </div>
+            <div class="switches" style="--primary: var(--error);--on-primary: var(--on-error);">
+                <label class="pure-material-switch">
+                    <input type="checkbox">
+                    <span>Off</span>
+                </label>
+                <br />
+                <label class="pure-material-switch">
+                    <input type="checkbox" checked>
+                    <span>On</span>
+                </label>
+            </div>
+            <div class="switches">
+                <label class="pure-material-switch">
+                    <input type="checkbox" disabled>
+                    <span>Off</span>
+                </label>
+                <br />
+                <label class="pure-material-switch">
+                    <input type="checkbox" checked disabled>
+                    <span>On</span>
+                </label>
+            </div> -->
+
+        </div>
+
+        <div class="title">Slider</div>
+        <div class="pure-material-card">
+            <div>
+                <label class="pure-material-slider" style="--primary: var(--primary-light);">
+                    <input type="range" min="0" max="100">
+                    <span>Slider</span>
+                </label>
+            </div>
+            <div>
+                <label class="pure-material-slider">
+                    <input type="range" min="0" max="100">
+                    <span>Slider</span>
+                </label>
+            </div>
+            <div>
+                <label class="pure-material-slider" style="--primary: var(--primary-dark);">
+                    <input type="range" min="0" max="100">
+                    <span>Slider</span>
+                </label>
+            </div>
+            <div>
+                <label class="pure-material-slider" style="--primary: var(--primary-variant);">
+                    <input type="range" min="0" max="100">
+                    <span>Slider</span>
+                </label>
+            </div>
+            <div>
+                <label class="pure-material-slider" style="--primary: var(--secondary-light);--on-primary: var(--on-secondary);">
+                    <input type="range" min="0" max="100">
+                    <span>Slider</span>
+                </label>
+            </div>
+            <div>
+                <label class="pure-material-slider" style="--primary: var(--secondary);--on-primary: var(--on-secondary);">
+                    <input type="range" min="0" max="100">
+                    <span>Slider</span>
+                </label>
+            </div>
+            <div>
+                <label class="pure-material-slider" style="--primary: var(--secondary-dark);--on-primary: var(--on-secondary);">
+                    <input type="range" min="0" max="100">
+                    <span>Slider</span>
+                </label>
+            </div>
+            <div>
+                <label class="pure-material-slider" style="--primary: var(--secondary-variant);--on-primary: var(--on-secondary);">
+                    <input type="range" min="0" max="100">
+                    <span>Slider</span>
+                </label>
+            </div>
+            <div>
+                <label class="pure-material-slider" style="--primary: var(--error);--on-primary: var(--on-error);">
+                    <input type="range" min="0" max="100">
+                    <span>Slider</span>
+                </label>
+            </div>
+            <div>
+                <label class="pure-material-slider">
+                    <input type="range" min="0" max="100" disabled>
+                    <span>Slider</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="title">Progress - Circular</div>
+        <div class="pure-material-card">
+            <div><progress class="pure-material-progress-circular" style="--primary: var(--primary-light);"></progress></div>
+            <div><progress class="pure-material-progress-circular"></progress></div>
+            <div><progress class="pure-material-progress-circular" style="--primary: var(--primary-dark);"></progress></div>
+            <div><progress class="pure-material-progress-circular" style="--primary: var(--primary-variant);"></progress></div>
+            <div><progress class="pure-material-progress-circular" style="--primary: var(--secondary-light);--on-primary: var(--on-secondary);"></progress></div>
+            <div><progress class="pure-material-progress-circular" style="--primary: var(--secondary);--on-primary: var(--on-secondary);"></progress></div>
+            <div><progress class="pure-material-progress-circular" style="--primary: var(--secondary-dark);--on-primary: var(--on-secondary);"></progress></div>
+            <div><progress class="pure-material-progress-circular" style="--primary: var(--secondary-variant);--on-primary: var(--on-secondary);"></progress></div>
+            <div><progress class="pure-material-progress-circular" style="--primary: var(--error);--on-primary: var(--on-error);"></progress></div>
+            <div></div>
+        </div>
+
+        <div class="title">Progress - Linear</div>
+        <div class="pure-material-card">
+            <div class="progresses" style="--primary: var(--primary-light);">
+                <progress class="pure-material-progress-linear approximate" [value]="this.value" max="100"></progress>
+                <progress class="pure-material-progress-linear"></progress>
+            </div>
+            <div class="progresses">
+                <progress class="pure-material-progress-linear approximate" [value]="this.value" max="100"></progress>
+                <progress class="pure-material-progress-linear"></progress>
+            </div>
+            <div class="progresses" style="--primary: var(--primary-dark);">
+                <progress class="pure-material-progress-linear approximate" [value]="this.value" max="100"></progress>
+                <progress class="pure-material-progress-linear"></progress>
+            </div>
+            <div class="progresses" style="--primary: var(--primary-variant);">
+                <progress class="pure-material-progress-linear approximate" [value]="this.value" max="100"></progress>
+                <progress class="pure-material-progress-linear"></progress>
+            </div>
+            <div class="progresses" style="--primary: var(--secondary-light);--on-primary: var(--on-secondary);">
+                <progress class="pure-material-progress-linear approximate" [value]="this.value" max="100"></progress>
+                <progress class="pure-material-progress-linear"></progress>
+            </div>
+            <div class="progresses" style="--primary: var(--secondary);--on-primary: var(--on-secondary);">
+                <progress class="pure-material-progress-linear approximate" [value]="this.value" max="100"></progress>
+                <progress class="pure-material-progress-linear"></progress>
+            </div>
+            <div class="progresses" style="--primary: var(--secondary-dark);--on-primary: var(--on-secondary);">
+                <progress class="pure-material-progress-linear approximate" [value]="this.value" max="100"></progress>
+                <progress class="pure-material-progress-linear"></progress>
+            </div>
+            <div class="progresses" style="--primary: var(--secondary-variant);--on-primary: var(--on-secondary);">
+                <progress class="pure-material-progress-linear approximate" [value]="this.value" max="100"></progress>
+                <progress class="pure-material-progress-linear"></progress>
+            </div>
+            <div class="progresses" style="--primary: var(--error);--on-primary: var(--on-error);">
+                <progress class="pure-material-progress-linear approximate" [value]="this.value" max="100"></progress>
+                <progress class="pure-material-progress-linear"></progress>
+            </div>
+            <div></div>
+        </div>
+
+        <div class="title">Textfield - Filled</div>
+        <div class="pure-material-card">
+            <div class="textfields" style="--primary: var(--primary-light);">
+                <label class="pure-material-textfield-filled">
+                    <input placeholder=" ">
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <input placeholder=" " value="Some text">
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <textarea placeholder=" "></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <textarea placeholder=" ">Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+            <div class="textfields">
+                <label class="pure-material-textfield-filled">
+                    <input placeholder=" ">
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <input placeholder=" " value="Some text">
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <textarea placeholder=" "></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <textarea placeholder=" ">Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+            <div class="textfields" style="--primary: var(--primary-dark);">
+                <label class="pure-material-textfield-filled">
+                    <input placeholder=" ">
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <input placeholder=" " value="Some text">
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <textarea placeholder=" "></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <textarea placeholder=" ">Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+            <div class="textfields" style="--primary: var(--primary-variant);">
+                <label class="pure-material-textfield-filled">
+                    <input placeholder=" ">
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <input placeholder=" " value="Some text">
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <textarea placeholder=" "></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <textarea placeholder=" ">Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+            <div class="textfields" style="--primary: var(--secondary-light);--on-primary: var(--on-secondary);">
+                <label class="pure-material-textfield-filled">
+                    <input placeholder=" ">
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <input placeholder=" " value="Some text">
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <textarea placeholder=" "></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <textarea placeholder=" ">Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+            <div class="textfields" style="--primary: var(--secondary);--on-primary: var(--on-secondary);">
+                <label class="pure-material-textfield-filled">
+                    <input placeholder=" ">
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <input placeholder=" " value="Some text">
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <textarea placeholder=" "></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <textarea placeholder=" ">Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+            <div class="textfields" style="--primary: var(--secondary-dark);--on-primary: var(--on-secondary);">
+                <label class="pure-material-textfield-filled">
+                    <input placeholder=" ">
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <input placeholder=" " value="Some text">
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <textarea placeholder=" "></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <textarea placeholder=" ">Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+            <div class="textfields" style="--primary: var(--secondary-variant);--on-primary: var(--on-secondary);">
+                <label class="pure-material-textfield-filled">
+                    <input placeholder=" ">
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <input placeholder=" " value="Some text">
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <textarea placeholder=" "></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <textarea placeholder=" ">Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+            <div class="textfields" style="--primary: var(--error);--on-primary: var(--on-error);">
+                <label class="pure-material-textfield-filled">
+                    <input placeholder=" ">
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <input placeholder=" " value="Some text">
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <textarea placeholder=" "></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <textarea placeholder=" ">Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+            <div class="textfields">
+                <label class="pure-material-textfield-filled">
+                    <input placeholder=" " disabled>
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <input placeholder=" " value="Some text" disabled>
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <textarea placeholder=" " disabled></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-filled">
+                    <textarea placeholder=" " disabled>Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="title">Textfield - Outlined</div>
+        <div class="pure-material-card">
+            <div class="textfields" style="--primary: var(--primary-light);">
+                <label class="pure-material-textfield-outlined">
+                    <input placeholder=" ">
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <input placeholder=" " value="Some text">
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <textarea placeholder=" "></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <textarea placeholder=" ">Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+            <div class="textfields">
+                <label class="pure-material-textfield-outlined">
+                    <input placeholder=" ">
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <input placeholder=" " value="Some text">
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <textarea placeholder=" "></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <textarea placeholder=" ">Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+            <div class="textfields" style="--primary: var(--primary-dark);">
+                <label class="pure-material-textfield-outlined">
+                    <input placeholder=" ">
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <input placeholder=" " value="Some text">
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <textarea placeholder=" "></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <textarea placeholder=" ">Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+            <div class="textfields" style="--primary: var(--primary-variant);">
+                <label class="pure-material-textfield-outlined">
+                    <input placeholder=" ">
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <input placeholder=" " value="Some text">
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <textarea placeholder=" "></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <textarea placeholder=" ">Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+            <div class="textfields" style="--primary: var(--secondary-light);--on-primary: var(--on-secondary);">
+                <label class="pure-material-textfield-outlined">
+                    <input placeholder=" ">
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <input placeholder=" " value="Some text">
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <textarea placeholder=" "></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <textarea placeholder=" ">Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+            <div class="textfields" style="--primary: var(--secondary);--on-primary: var(--on-secondary);">
+                <label class="pure-material-textfield-outlined">
+                    <input placeholder=" ">
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <input placeholder=" " value="Some text">
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <textarea placeholder=" "></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <textarea placeholder=" ">Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+            <div class="textfields" style="--primary: var(--secondary-dark);--on-primary: var(--on-secondary);">
+                <label class="pure-material-textfield-outlined">
+                    <input placeholder=" ">
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <input placeholder=" " value="Some text">
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <textarea placeholder=" "></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <textarea placeholder=" ">Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+            <div class="textfields" style="--primary: var(--secondary-variant);--on-primary: var(--on-secondary);">
+                <label class="pure-material-textfield-outlined">
+                    <input placeholder=" ">
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <input placeholder=" " value="Some text">
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <textarea placeholder=" "></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <textarea placeholder=" ">Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+            <div class="textfields" style="--primary: var(--error);--on-primary: var(--on-error);">
+                <label class="pure-material-textfield-outlined">
+                    <input placeholder=" ">
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <input placeholder=" " value="Some text">
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <textarea placeholder=" "></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <textarea placeholder=" ">Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+            <div class="textfields">
+                <label class="pure-material-textfield-outlined">
+                    <input placeholder=" " disabled>
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <input placeholder=" " value="Some text" disabled>
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <textarea placeholder=" " disabled></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-outlined">
+                    <textarea placeholder=" " disabled>Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="title">Textfield - Standard</div>
+        <div class="pure-material-card">
+            <div class="textfields" style="--primary: var(--primary-light);">
+                <label class="pure-material-textfield-standard">
+                    <input placeholder=" ">
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <input placeholder=" " value="Some text">
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <textarea placeholder=" "></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <textarea placeholder=" ">Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+            <div class="textfields">
+                <label class="pure-material-textfield-standard">
+                    <input placeholder=" ">
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <input placeholder=" " value="Some text">
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <textarea placeholder=" "></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <textarea placeholder=" ">Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+            <div class="textfields" style="--primary: var(--primary-dark);">
+                <label class="pure-material-textfield-standard">
+                    <input placeholder=" ">
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <input placeholder=" " value="Some text">
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <textarea placeholder=" "></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <textarea placeholder=" ">Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+            <div class="textfields" style="--primary: var(--primary-variant);">
+                <label class="pure-material-textfield-standard">
+                    <input placeholder=" ">
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <input placeholder=" " value="Some text">
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <textarea placeholder=" "></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <textarea placeholder=" ">Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+            <div class="textfields" style="--primary: var(--secondary-light);--on-primary: var(--on-secondary);">
+                <label class="pure-material-textfield-standard">
+                    <input placeholder=" ">
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <input placeholder=" " value="Some text">
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <textarea placeholder=" "></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <textarea placeholder=" ">Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+            <div class="textfields" style="--primary: var(--secondary);--on-primary: var(--on-secondary);">
+                <label class="pure-material-textfield-standard">
+                    <input placeholder=" ">
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <input placeholder=" " value="Some text">
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <textarea placeholder=" "></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <textarea placeholder=" ">Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+            <div class="textfields" style="--primary: var(--secondary-dark);--on-primary: var(--on-secondary);">
+                <label class="pure-material-textfield-standard">
+                    <input placeholder=" ">
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <input placeholder=" " value="Some text">
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <textarea placeholder=" "></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <textarea placeholder=" ">Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+            <div class="textfields" style="--primary: var(--secondary-variant);--on-primary: var(--on-secondary);">
+                <label class="pure-material-textfield-standard">
+                    <input placeholder=" ">
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <input placeholder=" " value="Some text">
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <textarea placeholder=" "></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <textarea placeholder=" ">Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+            <div class="textfields" style="--primary: var(--error);--on-primary: var(--on-error);">
+                <label class="pure-material-textfield-standard">
+                    <input placeholder=" ">
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <input placeholder=" " value="Some text">
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <textarea placeholder=" "></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <textarea placeholder=" ">Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+            <div class="textfields">
+                <label class="pure-material-textfield-standard">
+                    <input placeholder=" " disabled>
+                    <span>Empty</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <input placeholder=" " value="Some text" disabled>
+                    <span>Non-empty</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <textarea placeholder=" " disabled></textarea>
+                    <span>Empty Textarea</span>
+                </label>
+                <label class="pure-material-textfield-standard">
+                    <textarea placeholder=" " disabled>Some text</textarea>
+                    <span>Non-empty Textarea</span>
+                </label>
+            </div>
+        </div>
+    </main>
+</div>
