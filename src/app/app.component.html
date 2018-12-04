@@ -6,66 +6,81 @@
     </header>
     <div class="theming" [ngClass]="{ hidden: !slidersVisibility }">
         <app-switch id="toggle" [name]="'Colors'" (isClicked)="toggleTheming()"></app-switch>
-        <label class="pure-material-slider color-gradient">
-            <input #primary type="range" min="0" max="360" [value]="this.sliderValue['--primary']" (input)="updateColor(primary.value, '--primary')">
+
+        <ng-container *ngFor="let themingVariable of themingColors">
+            <ng-container *ngIf="isColorType(themingVariable); else range">
+                <app-slider class="color-gradient" [themeVariable]="themingVariable" [name]="themingVariable | formatVariable | titlecase" [currentValue]="sliderValue[themingVariable]"
+                    [minValue]="0" [maxValue]="360" (isSlided)="updateColor($event, themingVariable)"></app-slider>
+            </ng-container>
+            <ng-template #range>
+                <app-slider [themeVariable]="themingVariable" [name]="themingVariable | formatVariable | titlecase" [currentValue]="sliderValue[themingVariable]"
+                    [minValue]="0" [maxValue]="255" (isSlided)="updateColor($event, themingVariable)"></app-slider>
+            </ng-template>
+            <br>
+        </ng-container>
+
+        <!-- <label class="pure-material-slider color-gradient">
+            <input #primary type="range" min="0" max="360" [value]="sliderValue['--primary']" (input)="updateColor(primary.value, '--primary')">
             <span>Primary</span>
         </label>
         <label class="pure-material-slider color-gradient">
-            <input #primaryVariant type="range" min="0" max="360" [value]="this.sliderValue['--primary-variant']" style="--primary: var(--primary-variant);"
+            <input #primaryVariant type="range" min="0" max="360" [value]="sliderValue['--primary-variant']" style="--primary: var(--primary-variant);"
                 (input)="updateColor(primaryVariant.value, '--primary-variant')">
             <span>Primary Variant</span>
         </label>
         <label class="pure-material-slider">
-            <input #onPrimary type="range" min="0" max="255" [value]="this.sliderValue['--on-primary']" style="--primary: var(--on-primary);"
+            <input #onPrimary type="range" min="0" max="255" [value]="sliderValue['--on-primary']" style="--primary: var(--on-primary);"
                 (input)="updateColor(onPrimary.value, '--on-primary', 'shade')">
             <span>On Primary</span>
         </label>
         <label class="pure-material-slider color-gradient">
-            <input #secondary type="range" min="0" max="360" [value]="this.sliderValue['--secondary']" style="--primary: var(--secondary);"
+            <input #secondary type="range" min="0" max="360" [value]="sliderValue['--secondary']" style="--primary: var(--secondary);"
                 (input)="updateColor(secondary.value, '--secondary')">
             <span>Secondary</span>
         </label>
         <label class="pure-material-slider color-gradient">
-            <input #secondaryVariant type="range" min="0" max="360" [value]="this.sliderValue['--secondary-variant']"
-                style="--primary: var(--secondary-variant);" (input)="updateColor(secondaryVariant.value, '--secondary-variant')">
+            <input #secondaryVariant type="range" min="0" max="360" [value]="sliderValue['--secondary-variant']" style="--primary: var(--secondary-variant);"
+                (input)="updateColor(secondaryVariant.value, '--secondary-variant')">
             <span>Secondary Variant</span>
         </label>
         <label class="pure-material-slider">
-            <input #onSecondary type="range" min="0" max="255" [value]="this.sliderValue['--on-secondary']" style="--primary: var(--on-secondary);"
+            <input #onSecondary type="range" min="0" max="255" [value]="sliderValue['--on-secondary']" style="--primary: var(--on-secondary);"
                 (input)="updateColor(onSecondary.value, '--on-secondary', 'shade')">
             <span>On Secondary</span>
         </label>
         <label class="pure-material-slider">
-            <input #background type="range" min="0" max="255" [value]="this.sliderValue['--background']" style="--primary: var(--background);"
+            <input #background type="range" min="0" max="255" [value]="sliderValue['--background']" style="--primary: var(--background);"
                 (input)="updateColor(background.value, '--background', 'shade')">
             <span>Background</span>
         </label>
         <label class="pure-material-slider">
-            <input #onBackground type="range" min="0" max="255" [value]="this.sliderValue['--on-background']" style="--primary: var(--on-background);"
+            <input #onBackground type="range" min="0" max="255" [value]="sliderValue['--on-background']" style="--primary: var(--on-background);"
                 (input)="updateColor(onBackground.value, '--on-background', 'shade')">
             <span>On Background</span>
         </label>
         <label class="pure-material-slider">
-            <input #surface type="range" min="0" max="255" [value]="this.sliderValue['--surface']" style="--primary: var(--surface);"
+            <input #surface type="range" min="0" max="255" [value]="sliderValue['--surface']" style="--primary: var(--surface);"
                 (input)="updateColor(surface.value, '--surface', 'shade')">
             <span>Surface</span>
         </label>
         <label class="pure-material-slider">
-            <input #onSurface type="range" min="0" max="255" [value]="this.sliderValue['--on-surface']" style="--primary: var(--on-surface);"
+            <input #onSurface type="range" min="0" max="255" [value]="sliderValue['--on-surface']" style="--primary: var(--on-surface);"
                 (input)="updateColor(onSurface.value, '--on-surface', 'shade')">
             <span>On Surface</span>
         </label>
-
         <label class="pure-material-slider color-gradient">
-            <input #error type="range" min="0" max="360" [value]="this.sliderValue['--error']" style="--primary: var(--error);"
+            <input #error type="range" min="0" max="360" [value]="sliderValue['--error']" style="--primary: var(--error);"
                 (input)="updateColor(error.value, '--error')">
             <span>Error</span>
         </label>
         <label class="pure-material-slider">
-            <input #onError type="range" min="0" max="255" [value]="this.sliderValue['--on-error']" style="--primary: var(--on-error);"
+            <input #onError type="range" min="0" max="255" [value]="sliderValue['--on-error']" style="--primary: var(--on-error);"
                 (input)="updateColor(onError.value, '--on-error', 'shade')">
             <span>On Error</span>
-        </label>
+        </label> -->
+
+
+
     </div>
 
     <main class="grid" [ngClass]="{ pushed: slidersVisibility }">
@@ -88,7 +103,7 @@
 
         <div class="title">Button - Contained</div>
         <div class="pure-material-card">
-            <ng-container *ngFor="let themeVariable of themeVariableArray">
+            <ng-container *ngFor="let themeVariable of displayedColors">
                 <app-button-contained [themeVariable]="themeVariable"></app-button-contained>
             </ng-container>
             <app-button-contained [themeVariable]="themeVariable" [hasDisabled]="true"></app-button-contained>
@@ -96,7 +111,7 @@
 
         <div class="title">Button - Outlined</div>
         <div class="pure-material-card">
-            <ng-container *ngFor="let themeVariable of themeVariableArray">
+            <ng-container *ngFor="let themeVariable of displayedColors">
                 <app-button-outlined [themeVariable]="themeVariable"></app-button-outlined>
             </ng-container>
             <app-button-outlined [themeVariable]="themeVariable" [hasDisabled]="true"></app-button-outlined>
@@ -104,7 +119,7 @@
 
         <div class="title">Button - Text</div>
         <div class="pure-material-card">
-            <ng-container *ngFor="let themeVariable of themeVariableArray">
+            <ng-container *ngFor="let themeVariable of displayedColors">
                 <app-button-text [themeVariable]="themeVariable"></app-button-text>
             </ng-container>
             <app-button-text [themeVariable]="themeVariable" [hasDisabled]="true"></app-button-text>
@@ -112,7 +127,7 @@
 
         <div class="title">Button - FAB</div>
         <div class="pure-material-card">
-            <ng-container *ngFor="let themeVariable of themeVariableArray">
+            <ng-container *ngFor="let themeVariable of displayedColors">
                 <app-button-fab [themeVariable]="themeVariable" [materialIcon]="'palette'"></app-button-fab>
             </ng-container>
             <app-button-fab [themeVariable]="themeVariable" [materialIcon]="'palette'" [hasDisabled]="true"></app-button-fab>
@@ -120,7 +135,7 @@
 
         <div class="title">Checkbox</div>
         <div class="pure-material-card">
-            <div class="checkboxes" *ngFor="let themeVariable of themeVariableArray">
+            <div class="checkboxes" *ngFor="let themeVariable of displayedColors">
                 <app-checkbox [themeVariable]="themeVariable" [name]="'Unchecked'"></app-checkbox>
                 <app-checkbox [themeVariable]="themeVariable" [name]="'Checked'" [state]="'checked'"></app-checkbox>
                 <app-checkbox [themeVariable]="themeVariable" [name]="'Indeterminate'" [state]="'indeterminate'"></app-checkbox>
@@ -135,7 +150,7 @@
 
         <div class="title">Radio Buttons</div>
         <div class="pure-material-card">
-            <div class="radios" *ngFor="let themeVariable of themeVariableArray">
+            <div class="radios" *ngFor="let themeVariable of displayedColors">
                 <app-radio [themeVariable]="themeVariable" [name]="'Unchecked'" [groupName]="themeVariable"></app-radio>
                 <app-radio [themeVariable]="themeVariable" [name]="'Checked'" [isChecked]="true" [groupName]="themeVariable"></app-radio>
             </div>
@@ -149,7 +164,7 @@
 
         <div class="title">Switch</div>
         <div class="pure-material-card">
-            <div class="switches" *ngFor="let themeVariable of themeVariableArray">
+            <div class="switches" *ngFor="let themeVariable of displayedColors">
                 <app-switch [themeVariable]="themeVariable" [name]="'Off'"></app-switch>
                 <br />
                 <app-switch [themeVariable]="themeVariable" [name]="'On'" [isChecked]="true"></app-switch>
@@ -159,235 +174,33 @@
                 <br />
                 <app-switch [themeVariable]="themeVariable" [name]="'On'" [isChecked]="true" [hasDisabled]="true"></app-switch>
             </div>
-
-            <!-- <div class="switches" style="--primary: var(--primary-light);">
-                <label class="pure-material-switch">
-                    <input type="checkbox">
-                    <span>Off</span>
-                </label>
-                <br />
-                <label class="pure-material-switch">
-                    <input type="checkbox" checked>
-                    <span>On</span>
-                </label>
-            </div>
-            <div class="switches">
-                <label class="pure-material-switch">
-                    <input type="checkbox">
-                    <span>Off</span>
-                </label>
-                <br />
-                <label class="pure-material-switch">
-                    <input type="checkbox" checked>
-                    <span>On</span>
-                </label>
-            </div>
-            <div class="switches" style="--primary: var(--primary-dark);">
-                <label class="pure-material-switch">
-                    <input type="checkbox">
-                    <span>Off</span>
-                </label>
-                <br />
-                <label class="pure-material-switch">
-                    <input type="checkbox" checked>
-                    <span>On</span>
-                </label>
-            </div>
-            <div class="switches" style="--primary: var(--primary-variant);">
-                <label class="pure-material-switch">
-                    <input type="checkbox">
-                    <span>Off</span>
-                </label>
-                <br />
-                <label class="pure-material-switch">
-                    <input type="checkbox" checked>
-                    <span>On</span>
-                </label>
-            </div>
-            <div class="switches" style="--primary: var(--secondary-light);--on-primary: var(--on-secondary);">
-                <label class="pure-material-switch">
-                    <input type="checkbox">
-                    <span>Off</span>
-                </label>
-                <br />
-                <label class="pure-material-switch">
-                    <input type="checkbox" checked>
-                    <span>On</span>
-                </label>
-            </div>
-            <div class="switches" style="--primary: var(--secondary);--on-primary: var(--on-secondary);">
-                <label class="pure-material-switch">
-                    <input type="checkbox">
-                    <span>Off</span>
-                </label>
-                <br />
-                <label class="pure-material-switch">
-                    <input type="checkbox" checked>
-                    <span>On</span>
-                </label>
-            </div>
-            <div class="switches" style="--primary: var(--secondary-dark);--on-primary: var(--on-secondary);">
-                <label class="pure-material-switch">
-                    <input type="checkbox">
-                    <span>Off</span>
-                </label>
-                <br />
-                <label class="pure-material-switch">
-                    <input type="checkbox" checked>
-                    <span>On</span>
-                </label>
-            </div>
-            <div class="switches" style="--primary: var(--secondary-variant);--on-primary: var(--on-secondary);">
-                <label class="pure-material-switch">
-                    <input type="checkbox">
-                    <span>Off</span>
-                </label>
-                <br />
-                <label class="pure-material-switch">
-                    <input type="checkbox" checked>
-                    <span>On</span>
-                </label>
-            </div>
-            <div class="switches" style="--primary: var(--error);--on-primary: var(--on-error);">
-                <label class="pure-material-switch">
-                    <input type="checkbox">
-                    <span>Off</span>
-                </label>
-                <br />
-                <label class="pure-material-switch">
-                    <input type="checkbox" checked>
-                    <span>On</span>
-                </label>
-            </div>
-            <div class="switches">
-                <label class="pure-material-switch">
-                    <input type="checkbox" disabled>
-                    <span>Off</span>
-                </label>
-                <br />
-                <label class="pure-material-switch">
-                    <input type="checkbox" checked disabled>
-                    <span>On</span>
-                </label>
-            </div> -->
-
         </div>
 
         <div class="title">Slider</div>
         <div class="pure-material-card">
-            <div>
-                <label class="pure-material-slider" style="--primary: var(--primary-light);">
-                    <input type="range" min="0" max="100">
-                    <span>Slider</span>
-                </label>
+            <div *ngFor="let themeVariable of displayedColors">
+                <app-slider [themeVariable]="themeVariable" [name]="'Slider'" [minValue]="0" [maxValue]="100"></app-slider>
             </div>
             <div>
-                <label class="pure-material-slider">
-                    <input type="range" min="0" max="100">
-                    <span>Slider</span>
-                </label>
-            </div>
-            <div>
-                <label class="pure-material-slider" style="--primary: var(--primary-dark);">
-                    <input type="range" min="0" max="100">
-                    <span>Slider</span>
-                </label>
-            </div>
-            <div>
-                <label class="pure-material-slider" style="--primary: var(--primary-variant);">
-                    <input type="range" min="0" max="100">
-                    <span>Slider</span>
-                </label>
-            </div>
-            <div>
-                <label class="pure-material-slider" style="--primary: var(--secondary-light);--on-primary: var(--on-secondary);">
-                    <input type="range" min="0" max="100">
-                    <span>Slider</span>
-                </label>
-            </div>
-            <div>
-                <label class="pure-material-slider" style="--primary: var(--secondary);--on-primary: var(--on-secondary);">
-                    <input type="range" min="0" max="100">
-                    <span>Slider</span>
-                </label>
-            </div>
-            <div>
-                <label class="pure-material-slider" style="--primary: var(--secondary-dark);--on-primary: var(--on-secondary);">
-                    <input type="range" min="0" max="100">
-                    <span>Slider</span>
-                </label>
-            </div>
-            <div>
-                <label class="pure-material-slider" style="--primary: var(--secondary-variant);--on-primary: var(--on-secondary);">
-                    <input type="range" min="0" max="100">
-                    <span>Slider</span>
-                </label>
-            </div>
-            <div>
-                <label class="pure-material-slider" style="--primary: var(--error);--on-primary: var(--on-error);">
-                    <input type="range" min="0" max="100">
-                    <span>Slider</span>
-                </label>
-            </div>
-            <div>
-                <label class="pure-material-slider">
-                    <input type="range" min="0" max="100" disabled>
-                    <span>Slider</span>
-                </label>
+                <app-slider [themeVariable]="themeVariable" [name]="'Slider'" [minValue]="0" [maxValue]="100"
+                    [hasDisabled]="true"></app-slider>
             </div>
         </div>
 
         <div class="title">Progress - Circular</div>
         <div class="pure-material-card">
-            <div><progress class="pure-material-progress-circular" style="--primary: var(--primary-light);"></progress></div>
-            <div><progress class="pure-material-progress-circular"></progress></div>
-            <div><progress class="pure-material-progress-circular" style="--primary: var(--primary-dark);"></progress></div>
-            <div><progress class="pure-material-progress-circular" style="--primary: var(--primary-variant);"></progress></div>
-            <div><progress class="pure-material-progress-circular" style="--primary: var(--secondary-light);--on-primary: var(--on-secondary);"></progress></div>
-            <div><progress class="pure-material-progress-circular" style="--primary: var(--secondary);--on-primary: var(--on-secondary);"></progress></div>
-            <div><progress class="pure-material-progress-circular" style="--primary: var(--secondary-dark);--on-primary: var(--on-secondary);"></progress></div>
-            <div><progress class="pure-material-progress-circular" style="--primary: var(--secondary-variant);--on-primary: var(--on-secondary);"></progress></div>
-            <div><progress class="pure-material-progress-circular" style="--primary: var(--error);--on-primary: var(--on-error);"></progress></div>
+            <div *ngFor="let themeVariable of displayedColors">
+                <app-progress-circular [themeVariable]="themeVariable"></app-progress-circular>
+            </div>
             <div></div>
         </div>
 
         <div class="title">Progress - Linear</div>
         <div class="pure-material-card">
-            <div class="progresses" style="--primary: var(--primary-light);">
-                <progress class="pure-material-progress-linear approximate" [value]="this.value" max="100"></progress>
-                <progress class="pure-material-progress-linear"></progress>
-            </div>
-            <div class="progresses">
-                <progress class="pure-material-progress-linear approximate" [value]="this.value" max="100"></progress>
-                <progress class="pure-material-progress-linear"></progress>
-            </div>
-            <div class="progresses" style="--primary: var(--primary-dark);">
-                <progress class="pure-material-progress-linear approximate" [value]="this.value" max="100"></progress>
-                <progress class="pure-material-progress-linear"></progress>
-            </div>
-            <div class="progresses" style="--primary: var(--primary-variant);">
-                <progress class="pure-material-progress-linear approximate" [value]="this.value" max="100"></progress>
-                <progress class="pure-material-progress-linear"></progress>
-            </div>
-            <div class="progresses" style="--primary: var(--secondary-light);--on-primary: var(--on-secondary);">
-                <progress class="pure-material-progress-linear approximate" [value]="this.value" max="100"></progress>
-                <progress class="pure-material-progress-linear"></progress>
-            </div>
-            <div class="progresses" style="--primary: var(--secondary);--on-primary: var(--on-secondary);">
-                <progress class="pure-material-progress-linear approximate" [value]="this.value" max="100"></progress>
-                <progress class="pure-material-progress-linear"></progress>
-            </div>
-            <div class="progresses" style="--primary: var(--secondary-dark);--on-primary: var(--on-secondary);">
-                <progress class="pure-material-progress-linear approximate" [value]="this.value" max="100"></progress>
-                <progress class="pure-material-progress-linear"></progress>
-            </div>
-            <div class="progresses" style="--primary: var(--secondary-variant);--on-primary: var(--on-secondary);">
-                <progress class="pure-material-progress-linear approximate" [value]="this.value" max="100"></progress>
-                <progress class="pure-material-progress-linear"></progress>
-            </div>
-            <div class="progresses" style="--primary: var(--error);--on-primary: var(--on-error);">
-                <progress class="pure-material-progress-linear approximate" [value]="this.value" max="100"></progress>
-                <progress class="pure-material-progress-linear"></progress>
+            <div class="progresses" *ngFor="let themeVariable of displayedColors">
+                <app-progress-linear class="approximate" [themeVariable]="themeVariable" [currentValue]="value"
+                    [maxValue]="100"></app-progress-linear>
+                <app-progress-linear [themeVariable]="themeVariable" [indeterminate]="true"></app-progress-linear>
             </div>
             <div></div>
         </div>

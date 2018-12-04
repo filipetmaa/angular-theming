@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { ThemeService } from './theme';
 import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
+import { Theme } from './theme/symbols';
 
 @Component({
   selector: 'theme-showcase-app',
@@ -10,25 +11,24 @@ import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
 })
 export class AppComponent implements OnInit {
 
-  active = this.themeService.getActiveTheme();
-  themes = this.themeService.getAllThemes();
-  index = this.themeService.getActiveThemeIndex();
-  title = this.active.name.replace("-", " ").toUpperCase();
+  themes: Theme[] = this.themeService.getAllThemes();
+  index: number = this.themeService.getActiveThemeIndex();
+  active: Theme;
+  title: string;
   convert = require('color-convert');
-  value = 0;
-  slidersVisibility = false;
-  sliderValue = {};
-  themeVariableArray = [];
+  value: number = 0;
+  slidersVisibility: Boolean = false;
+  sliderValue: Object;
+  displayedColors: Object[];
+  themingColors: Object[];
 
-  constructor(private themeService: ThemeService, private sanitizer: DomSanitizer) {
-    this.updateThemeVariableArray();
-    this.updateSlider();
-  }
+  constructor(private themeService: ThemeService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     setInterval(() => {
       this.value = this.value === 100 ? 0 : this.value + 10;
     }, 1000);
+    this.updateTheme();
   }
 
   prevTheme() {
@@ -58,43 +58,38 @@ export class AppComponent implements OnInit {
   }
 
   updateThemeVariableArray() {
-    this.themeVariableArray = [];
+    this.displayedColors = [];
+    this.themingColors = [];
     for (let variableName in this.active.properties) {
       if (!variableName.startsWith("--on-") && variableName != "--surface" && variableName != "--background") {
-        this.themeVariableArray.push(variableName);
+        this.displayedColors.push(variableName);
+      }
+      if (!variableName.endsWith("-light") && !variableName.endsWith("-dark")) {
+        this.themingColors.push(variableName);
       }
     }
   }
 
   updateSlider() {
     this.sliderValue = {};
-    var rgb;
-    const allEqual = arr => arr.every(v => v === arr[0])
-    for (let key in this.active.properties) {
-      if (!key.endsWith("-light") && !key.endsWith("-dark")) {
-        rgb = JSON.parse("[" + this.active.properties[key] + "]");
-        if (allEqual(rgb)) {
-          this.sliderValue = { ... this.sliderValue, ... { [key]: this.updateSliderValue(key, 'shade') } }
-        } else {
-          this.sliderValue = { ... this.sliderValue, ... { [key]: this.updateSliderValue(key) } }
-        }
+    for (let variableName in this.active.properties) {
+      if (!variableName.endsWith("-light") && !variableName.endsWith("-dark")) {
+        this.sliderValue = { ... this.sliderValue, ... { [variableName]: this.updateSliderValue(variableName) } }
       }
     }
   }
 
-  updateSliderValue(variable, sliderType = "color") {
+  updateSliderValue(variable) {
     var rgb = JSON.parse("[" + this.active.properties[variable] + "]");
-    if (sliderType == "shade") {
-      return rgb[0];
+    if (this.isColorType(variable)) {
+      var hsl = this.convert.rgb.hsl(rgb);
+      return hsl[0];
     }
-    var hsl = this.convert.rgb.hsl(rgb);
-    return hsl[0];
+    return rgb[0];
   }
 
-  updateColor(value, variable, colorType = "color") {
-    if (colorType == "shade") {
-      this.themeService.updateTheme(this.active.name, { [variable]: `${value},${value},${value}` });
-    } else {
+  updateColor(value, variable) {
+    if (this.isColorType(variable)) {
       var rgb = this.convert.hsl.rgb(value, 85, 50);
       this.themeService.updateTheme(this.active.name, { [variable]: `${rgb[0]},${rgb[1]},${rgb[2]}` });
       if (this.active.properties[variable + "-light"]) {
@@ -105,6 +100,18 @@ export class AppComponent implements OnInit {
         rgb = this.convert.hsl.rgb(value, 85, 30);
         this.themeService.updateTheme(this.active.name, { [variable + "-dark"]: `${rgb[0]},${rgb[1]},${rgb[2]}` });
       }
+    } else {
+      this.themeService.updateTheme(this.active.name, { [variable]: `${value},${value},${value}` });
+    }
+  }
+
+  isColorType(themeVariable): Boolean {
+    const allEqual = arr => arr.every(v => v === arr[0])
+    var rgb = JSON.parse("[" + this.active.properties[themeVariable] + "]");
+    if (allEqual(rgb)) {
+      return false;
+    } else {
+      return true;
     }
   }
 

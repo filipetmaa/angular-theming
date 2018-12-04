@@ -1,0 +1,5 @@
+<label class="pure-material-slider" [style]="componentStyle">
+    <input type="range" [value]="currentValue" [min]="minValue" [max]="maxValue" [disabled]="hasDisabled" (click)="isClicked.emit()"
+        (input)="isSlided.emit($event.target.value)">
+    <span>{{name}}</span>
+</label>

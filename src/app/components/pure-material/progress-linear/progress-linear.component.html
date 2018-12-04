@@ -1,0 +1,6 @@
+<ng-container *ngIf="indeterminate; else aproximate">
+    <progress class="pure-material-progress-linear" [style]="componentStyle"></progress>
+</ng-container>
+<ng-template #aproximate>
+    <progress class="pure-material-progress-linear" [style]="componentStyle" [value]="currentValue" [max]="maxValue"></progress>
+</ng-template>
