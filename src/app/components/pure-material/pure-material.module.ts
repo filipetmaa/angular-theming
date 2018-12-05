@@ -10,6 +10,9 @@ import { SwitchComponent } from './switch/switch.component';
 import { SliderComponent } from './slider/slider.component';
 import { ProgressCircularComponent } from './progress-circular/progress-circular.component';
 import { ProgressLinearComponent } from './progress-linear/progress-linear.component';
+import { TextfieldFilledComponent } from './textfield-filled/textfield-filled.component';
+import { TextfieldOutlinedComponent } from './textfield-outlined/textfield-outlined.component';
+import { TextfieldStandardComponent } from './textfield-standard/textfield-standard.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { ProgressLinearComponent } from './progress-linear/progress-linear.compo
     SwitchComponent,
     SliderComponent,
     ProgressCircularComponent,
-    ProgressLinearComponent
+    ProgressLinearComponent,
+    TextfieldFilledComponent,
+    TextfieldOutlinedComponent,
+    TextfieldStandardComponent
   ],
   imports: [
     CommonModule
@@ -37,7 +43,10 @@ import { ProgressLinearComponent } from './progress-linear/progress-linear.compo
     SwitchComponent,
     SliderComponent,
     ProgressCircularComponent,
-    ProgressLinearComponent
+    ProgressLinearComponent,
+    TextfieldFilledComponent,
+    TextfieldOutlinedComponent,
+    TextfieldStandardComponent
   ]
 })
 export class PureMaterialModule { }

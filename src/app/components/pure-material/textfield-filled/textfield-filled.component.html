@@ -1,0 +1,9 @@
+<label class="pure-material-textfield-filled" [style]="componentStyle">
+    <ng-container *ngIf="isTextarea; else text">
+        <textarea placeholder=" " [disabled]="hasDisabled">{{defaultText}}</textarea>
+    </ng-container>
+    <ng-template #text>
+        <input placeholder=" " [value]="defaultText" [disabled]="hasDisabled">
+    </ng-template>
+    <span>{{name}}</span>
+</label>

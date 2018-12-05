@@ -27,7 +27,7 @@ header {
 
 .grid {
   display: grid;
-  padding: 120px 16px 16px;
+  padding: 100px 16px 16px;
   grid-template-columns: 180px 1fr;
   grid-column-gap: 24px;
   grid-row-gap: 32px;
@@ -54,7 +54,6 @@ header {
 .title {
   color: inherit;
   font-size: 20px;
-  margin-top: 16px;
 }
 
 .checkboxes>app-checkbox>label,
@@ -71,19 +70,19 @@ header {
   margin: 0 0 16px;
 }
 
-.textfields>label {
+.textfields>*>label {
   margin: 16px 0;
 }
 
 .checkboxes>app-checkbox:first-child>label,
 .radios>app-radio:first-child>label,
-.textfields>label:first-child {
+.textfields>*:first-child>label {
   margin: 0 0 16px;
 }
 
 .checkboxes>app-checkbox:last-child>label,
 .radios>app-radio:last-child>label,
-.textfields>label:last-child {
+.textfields>*:last-child>label {
   margin: 16px 0 0;
 }
 
@@ -111,6 +110,16 @@ a:hover {
 }
 
 /* Theming */
+
+#scrollbar-background {
+  position: fixed;
+  bottom: -12px;
+  z-index: -1;
+  height: 12px;
+  width: 100%;
+  background-color: RGB(var(--background));
+}
+
 .theming {
   position: fixed;
   height: calc(100% - 118px);

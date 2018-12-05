@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { FormatVariablePipe } from './shared/pipes/format-variable.pipe'
 import { ThemeModule, lightTheme, darkTheme, clientTheme, clientDarkTheme } from './theme';
 import { PureMaterialModule } from './components/pure-material/pure-material.module';
+import { ShowcaseTitleComponent } from './components/showcase-title/showcase-title.component';
 
 declare var require: any;
 
@@ -14,12 +15,13 @@ declare var require: any;
     PureMaterialModule,
     ThemeModule.forRoot({
       themes: [lightTheme, darkTheme, clientTheme, clientDarkTheme],
-      active: 'client-dark'
+      active: 'client-dark' //light, dark, client, client-dark
     })
   ],
   declarations: [
     AppComponent,
-    FormatVariablePipe
+    FormatVariablePipe,
+    ShowcaseTitleComponent
   ],
   bootstrap: [AppComponent]
 })

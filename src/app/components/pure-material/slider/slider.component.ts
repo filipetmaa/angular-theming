@@ -40,9 +40,10 @@ export class SliderComponent implements OnInit {
         }
       }
     }
-    this.currentValue = this.currentValue;
-    this.minValue = this.minValue;
-    this.maxValue = this.maxValue;
+  }
+
+  getCurrentValue() {
+    return this.currentValue;
   }
 
 }
