@@ -5,204 +5,202 @@
   font-size: 16px;
   color: RGB(var(--on-background));
   background-color: RGB(var(--background));
-}
 
-header {
-  z-index: 1;
-  position: fixed;
-  box-sizing: border-box;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  padding: 16px;
-  display: grid;
-  grid-template-columns: 64px 1fr 64px;
-  align-items: center;
-  color: RGB(var(--on-primary));
-  background-color: RGB(var(--primary));
-  text-align: center;
-  font-size: 36px;
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-}
-
-.grid {
-  display: grid;
-  padding: 100px 16px 16px;
-  grid-template-columns: 180px 1fr;
-  grid-column-gap: 24px;
-  grid-row-gap: 32px;
-  transition: padding-left 0.5s ease-in-out;
-}
-
-.grid.pushed {
-  padding-left: 256px;
-}
-
-.grid>* {
-  display: grid;
-  padding: 16px;
-  grid-template-columns: repeat(10, minmax(200px, 1fr));
-  grid-column-gap: 24px;
-}
-
-.column {
-  color: RGB(var(--primary));
-  font-size: 20px;
-  margin-top: 16px;
-}
-
-.title {
-  color: inherit;
-  font-size: 20px;
-}
-
-.checkboxes>app-checkbox>label,
-.radios>app-radio>label {
-  display: block;
-  margin: 16px 0;
-}
-
-.switches>app-switch>label {
-  width: 120px;
-}
-
-.switches>app-switch:first-child>label {
-  margin: 0 0 16px;
-}
-
-.textfields>*>label {
-  margin: 16px 0;
-}
-
-.checkboxes>app-checkbox:first-child>label,
-.radios>app-radio:first-child>label,
-.textfields>*:first-child>label {
-  margin: 0 0 16px;
-}
-
-.checkboxes>app-checkbox:last-child>label,
-.radios>app-radio:last-child>label,
-.textfields>*:last-child>label {
-  margin: 16px 0 0;
-}
-
-.progresses>app-progress-linear:first-child>progress {
-  margin: 0 0 16px;
-}
-
-.progresses>app-progress-linear:last-child>progress {
-  margin: 16px 0 0;
-}
-
-footer {
-  padding: 24px;
-  text-align: center;
-}
-
-a {
-  font-size: 18px;
-  color: RGB(var(--primary));
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* Theming */
-
-#scrollbar-background {
-  position: fixed;
-  bottom: -12px;
-  z-index: -1;
-  height: 12px;
-  width: 100%;
-  background-color: RGB(var(--background));
-}
-
-.theming {
-  position: fixed;
-  height: calc(100% - 118px);
-  left: 0;
-  bottom: -12px;
-  z-index: 1;
-  padding: 24px 24px 18px;
-  color: #000;
-  background-color: #eee;
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  transform: none;
-  transition: transform 0.5s ease-in-out, border-radius 1s ease-in-out;
-  overflow: scroll;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-.theming.hidden {
-  transform: translate(-70%, calc(100% - 75px));
-  border-radius: 0 32px 0 0;
-  overflow: visible;
-}
-
-#toggle label {
-  display: block;
-  width: 100%;
-  margin-bottom: 16px;
-}
-
-#toggle label>span {
-  color: RGB(var(--primary, 0, 0, 0));
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.theming>app-slider>label {
-  display: block;
-  color: rgba(0, 0, 0, 0.87);
-}
-
-.theming>app-slider>label>input::-webkit-slider-runnable-track {
-  background-color: transparent !important;
-  background: linear-gradient(to right, #000, #fff);
-}
-
-.theming>app-slider>label>input::-moz-range-track {
-  background-color: transparent !important;
-  background: linear-gradient(to right, #000, #fff);
-}
-
-.theming>app-slider>label>input::-moz-range-progress {
-  background-color: transparent !important;
-}
-
-.theming>app-slider>label>input::-ms-fill-lower,
-.theming>app-slider>label>input::-ms-fill-upper {
-  background-color: transparent !important;
-}
-
-.theming>app-slider>label>input::-ms-track {
-  background: linear-gradient(to right, #000, #fff);
-}
-
-.theming>app-slider>label>span {
-  color: black;
-}
-
-@mixin colored-track() {
-  background: linear-gradient(to right, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00);
-}
-
-.color-gradient>label>input[type=range] {
-  &::-webkit-slider-runnable-track {
-    @include colored-track
+  header {
+    z-index: 1;
+    position: fixed;
+    box-sizing: border-box;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    padding: 16px;
+    display: grid;
+    grid-template-columns: 64px 1fr 64px;
+    align-items: center;
+    color: RGB(var(--on-primary));
+    background-color: RGB(var(--primary));
+    text-align: center;
+    font-size: 36px;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   }
 
-  &::-moz-range-track {
-    @include colored-track
+  .grid {
+    display: grid;
+    padding: 100px 16px 16px;
+    grid-template-columns: 180px 1fr;
+    grid-column-gap: 24px;
+    grid-row-gap: 32px;
+    transition: padding-left 0.5s ease-in-out;
+
+    &.pushed {
+      padding-left: 256px;
+    }
+
+    &>* {
+      display: grid;
+      padding: 16px;
+      grid-template-columns: repeat(10, minmax(200px, 1fr));
+      grid-column-gap: 24px;
+    }
   }
 
-  &::-ms-track {
-    @include colored-track
+  .title {
+    color: inherit;
+    font-size: 20px;
+  }
+
+  .checkboxes .pure-material-checkbox,
+  .radios .pure-material-radio {
+    display: block;
+    margin: 16px 0;
+  }
+
+  .switches .pure-material-switch {
+    width: 120px;
+  }
+
+  .switches>app-switch:first-child>label {
+    margin: 0 0 16px;
+  }
+
+  .textfields>*>label {
+    margin: 16px 0;
+  }
+
+  .checkboxes>app-checkbox:first-child>label,
+  .radios>app-radio:first-child>label,
+  .textfields>*:first-child>label {
+    margin: 0 0 16px;
+  }
+
+  .checkboxes>app-checkbox:last-child>label,
+  .radios>app-radio:last-child>label,
+  .textfields>*:last-child>label {
+    margin: 16px 0 0;
+  }
+
+  .progresses>app-progress-linear:first-child>progress {
+    margin: 0 0 16px;
+  }
+
+  .progresses>app-progress-linear:last-child>progress {
+    margin: 16px 0 0;
+  }
+
+  footer {
+    padding: 24px;
+    text-align: center;
+  }
+
+  a {
+    font-size: 18px;
+    color: RGB(var(--primary));
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* Theming */
+
+  .theming {
+    position: fixed;
+    height: calc(100% - 118px);
+    left: 0;
+    bottom: -12px;
+    z-index: 1;
+    padding: 24px 24px 18px;
+    color: #000;
+    background-color: #eee;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    transform: none;
+    transition: transform 0.5s ease-in-out, border-radius 1s ease-in-out;
+    overflow: scroll;
+
+    &.hidden {
+      transform: translate(-70%, calc(100% - 75px));
+      border-radius: 0 32px 0 0;
+      overflow: visible;
+    }
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    #toggle>.pure-material-switch {
+      display: block;
+      margin-bottom: 16px;
+
+      input:not(:checked)+span::before {
+        background-color: RGBA(0, 0, 0, 0.38) !important;
+      }
+
+      span {
+        color: RGB(var(--primary, 0, 0, 0));
+        font-size: 20px;
+        font-weight: bold;
+      }
+    }
+
+    .pure-material-slider {
+      display: block;
+      color: RGB(0, 0, 0) !important;
+      opacity: 0.87;
+
+      input {
+        &::-webkit-slider-runnable-track {
+          background-color: transparent !important;
+          background: linear-gradient(to right, #000, #fff);
+        }
+
+        &::-moz-range-track {
+          background-color: transparent !important;
+          background: linear-gradient(to right, #000, #fff);
+        }
+
+        &::-moz-range-progress {
+          background-color: transparent !important;
+        }
+
+        &::-ms-fill-lower,
+        &::-ms-fill-upper {
+          background-color: transparent !important;
+        }
+
+        &::-ms-track {
+          background: linear-gradient(to right, #000, #fff);
+        }
+
+      }
+    }
+
+    @mixin colored-track() {
+      background: linear-gradient(to right, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00);
+    }
+
+    .color-gradient>.pure-material-slider>input {
+      &::-webkit-slider-runnable-track {
+        @include colored-track
+      }
+
+      &::-moz-range-track {
+        @include colored-track
+      }
+
+      &::-ms-track {
+        @include colored-track
+      }
+    }
+
+  }
+
+  #scrollbar-background {
+    position: fixed;
+    bottom: -12px;
+    z-index: -1;
+    height: 12px;
+    width: 100%;
+    background-color: RGB(var(--background));
   }
 }
