@@ -1,7 +1,7 @@
 #container {
   display: table;
   margin: 0;
-  font-family: "Roboto", "Segoe UI", BlinkMacSystemFont, system-ui, -apple-system;
+  font-family: var(--pure-material-font, "Roboto", "Segoe UI", BlinkMacSystemFont, system-ui, -apple-system);
   font-size: 16px;
   color: RGB(var(--on-background));
   background-color: RGB(var(--background));
@@ -41,6 +41,18 @@
       padding: 16px;
       grid-template-columns: repeat(10, minmax(200px, 1fr));
       grid-column-gap: 24px;
+    }
+
+    .pure-material-card {
+      border: none;
+      border-radius: 4px;
+      padding: 16px;
+      min-width: 64px;
+      text-overflow: ellipsis;
+      color: RGB(var(--on-surface, 0, 0, 0));
+      background-color: RGB(var(--surface, 255, 255, 255));
+      box-shadow: 0 3px 1px -2px RGBA(0, 0, 0, 0.2), 0 2px 2px 0 RGBA(0, 0, 0, 0.14), 0 1px 5px 0 RGBA(0, 0, 0, 0.12);
+      outline: none;
     }
   }
 
