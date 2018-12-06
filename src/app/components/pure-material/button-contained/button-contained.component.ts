@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { SafeStyle, disableDebugTools, DomSanitizer } from '@angular/platform-browser';
+import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
 import { ThemeService } from 'src/app/theme';
 
 @Component({
@@ -10,6 +10,7 @@ import { ThemeService } from 'src/app/theme';
 export class ButtonContainedComponent implements OnInit {
 
   @Input() themeVariable: string;
+  @Input() name: string;
   @Input() hasDisabled: Boolean;
 
   @Output() isClicked = new EventEmitter();

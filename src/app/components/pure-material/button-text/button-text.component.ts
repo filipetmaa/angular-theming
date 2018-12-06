@@ -10,6 +10,7 @@ import { ThemeService } from 'src/app/theme';
 export class ButtonTextComponent implements OnInit {
 
   @Input() themeVariable: string;
+  @Input() name: string;
   @Input() hasDisabled: Boolean;
 
   @Output() isClicked = new EventEmitter();

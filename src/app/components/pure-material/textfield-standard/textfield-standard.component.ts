@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SafeStyle, disableDebugTools, DomSanitizer } from '@angular/platform-browser';
+import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
 import { ThemeService } from 'src/app/theme';
 
 @Component({

@@ -9,7 +9,7 @@
         <app-switch id="toggle" [name]="'Colors'" (isClicked)="toggleTheming()"></app-switch>
         <ng-container *ngFor="let themingVariable of themingColors">
             <app-slider [ngClass]="{'color-gradient': isColorType(themingVariable)}" [themeVariable]="themingVariable"
-                [name]="themingVariable | formatVariable | titlecase" [currentValue]="sliderValue[themingVariable]"
+                [name]="themingVariable | formatVariable " [currentValue]="sliderValue[themingVariable]"
                 [minValue]="0" [maxValue]="isColorType(themingVariable) ? 360 : 255" (isSlided)="updateColor($event, themingVariable)"></app-slider>
             <br>
         </ng-container>
@@ -27,25 +27,25 @@
         <div class="title">Button - Contained</div>
         <div class="pure-material-card">
             <ng-container *ngFor="let themeVariable of displayedColors">
-                <app-button-contained [themeVariable]="themeVariable"></app-button-contained>
+                <app-button-contained [themeVariable]="themeVariable" [name]="'Contained'"></app-button-contained>
             </ng-container>
-            <app-button-contained [themeVariable]="themeVariable" [hasDisabled]="true"></app-button-contained>
+            <app-button-contained [themeVariable]="themeVariable" [name]="'Contained'" [hasDisabled]="true"></app-button-contained>
         </div>
 
         <div class="title">Button - Outlined</div>
         <div class="pure-material-card">
             <ng-container *ngFor="let themeVariable of displayedColors">
-                <app-button-outlined [themeVariable]="themeVariable"></app-button-outlined>
+                <app-button-outlined [themeVariable]="themeVariable" [name]="'Outlined'"></app-button-outlined>
             </ng-container>
-            <app-button-outlined [themeVariable]="themeVariable" [hasDisabled]="true"></app-button-outlined>
+            <app-button-outlined [themeVariable]="themeVariable" [name]="'Outlined'" [hasDisabled]="true"></app-button-outlined>
         </div>
 
         <div class="title">Button - Text</div>
         <div class="pure-material-card">
             <ng-container *ngFor="let themeVariable of displayedColors">
-                <app-button-text [themeVariable]="themeVariable"></app-button-text>
+                <app-button-text [themeVariable]="themeVariable" [name]="'Text'"></app-button-text>
             </ng-container>
-            <app-button-text [themeVariable]="themeVariable" [hasDisabled]="true"></app-button-text>
+            <app-button-text [themeVariable]="themeVariable" [name]="'Text'" [hasDisabled]="true"></app-button-text>
         </div>
 
         <div class="title">Button - FAB</div>
