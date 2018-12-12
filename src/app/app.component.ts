@@ -56,7 +56,7 @@ export class AppComponent implements OnInit {
     this.title = this.active.name.replace("-", " ").toUpperCase();
     this.updateThemeVariableArray();
     this.updateSlider();
-    this.themeVariableNumber = this.sanitizer.bypassSecurityTrustStyle('--variable-number: ' + (this.displayedColors.length + 1);
+    this.themeVariableNumber = this.sanitizer.bypassSecurityTrustStyle('--variable-number: ' + (this.displayedColors.length + 1));
   }
 
   updateThemeVariableArray() {

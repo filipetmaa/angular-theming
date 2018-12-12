@@ -31,6 +31,7 @@
     line-height: inherit;
     caret-color: RGB(var(--primary, 33, 150, 243));
     transition: border 0.2s, box-shadow 0.2s;
+    resize: none;
 }
 
 /* Span */
