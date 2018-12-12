@@ -4,3 +4,4 @@ export * from './light-theme';
 export * from './dark-theme';
 export * from './client-theme';
 export * from './client-dark-theme';
+export * from './pantone-colors';

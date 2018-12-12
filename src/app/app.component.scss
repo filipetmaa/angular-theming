@@ -39,7 +39,7 @@
     &>* {
       display: grid;
       padding: 16px;
-      grid-template-columns: repeat(10, minmax(200px, 1fr));
+      grid-template-columns: repeat(var(--variable-number), minmax(200px, 1fr));
       grid-column-gap: 24px;
     }
 

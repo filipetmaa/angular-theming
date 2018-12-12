@@ -15,7 +15,7 @@
         </ng-container>
     </div>
 
-    <main class="grid" [ngClass]="{ pushed: slidersVisibility }">
+    <main class="grid" [ngClass]="{ pushed: slidersVisibility }" [style]="themeVariableNumber">
         <div></div>
         <div>
             <ng-container *ngFor="let themeVariable of displayedColors">

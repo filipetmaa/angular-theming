@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   themes: Theme[] = this.themeService.getAllThemes();
   index: number = this.themeService.getActiveThemeIndex();
   active: Theme;
+  themeVariableNumber: Object;
   title: string;
   convert = require('color-convert');
   value: number = 0;
@@ -55,6 +56,7 @@ export class AppComponent implements OnInit {
     this.title = this.active.name.replace("-", " ").toUpperCase();
     this.updateThemeVariableArray();
     this.updateSlider();
+    this.themeVariableNumber = this.sanitizer.bypassSecurityTrustStyle('--variable-number: ' + (this.displayedColors.length + 1);
   }
 
   updateThemeVariableArray() {
