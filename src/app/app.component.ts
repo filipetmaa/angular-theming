@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { ThemeService } from './theme';
-import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Theme } from './theme/symbols';
 
 @Component({
