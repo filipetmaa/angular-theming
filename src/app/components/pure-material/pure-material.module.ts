@@ -13,6 +13,7 @@ import { ProgressLinearComponent } from './progress-linear/progress-linear.compo
 import { TextfieldFilledComponent } from './textfield-filled/textfield-filled.component';
 import { TextfieldOutlinedComponent } from './textfield-outlined/textfield-outlined.component';
 import { TextfieldStandardComponent } from './textfield-standard/textfield-standard.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { TextfieldStandardComponent } from './textfield-standard/textfield-stand
     TextfieldStandardComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule
   ],
   exports: [
     ButtonContainedComponent,

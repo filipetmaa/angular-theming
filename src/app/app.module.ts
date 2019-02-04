@@ -6,6 +6,7 @@ import { FormatVariablePipe } from './shared/pipes/format-variable.pipe'
 import { ThemeModule, lightTheme, darkTheme, clientTheme, clientDarkTheme, pantoneColors } from './theme';
 import { PureMaterialModule } from './components/pure-material/pure-material.module';
 import { ShowcaseTitleComponent } from './components/showcase-title/showcase-title.component';
+import { SharedModule } from './shared/shared.module';
 
 declare var require: any;
 
@@ -13,6 +14,7 @@ declare var require: any;
   imports: [
     BrowserModule,
     PureMaterialModule,
+    SharedModule,
     ThemeModule.forRoot({
       themes: [lightTheme, darkTheme, clientTheme, clientDarkTheme, pantoneColors],
       active: 'pantone-colors' //light, dark, client, client-dark, pantone-colors

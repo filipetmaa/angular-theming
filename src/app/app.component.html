@@ -1,8 +1,12 @@
+
 <div theme id="container">
     <header>
-        <app-button-fab [themeVariable]="'--secondary'" [materialIcon]="'keyboard_arrow_left'" (isClicked)="prevTheme()"></app-button-fab>
-        {{title}} THEME
-        <app-button-fab [themeVariable]="'--secondary'" [materialIcon]="'keyboard_arrow_right'" (isClicked)="nextTheme()"></app-button-fab>
+        <app-button-fab [themeVariable]="'--secondary'" [icon]="'keyboard_arrow_left'" (isClicked)="prevTheme()"></app-button-fab>
+        <div>
+            <div>{{title}} THEME</div>
+            <svg-icon className="header-svg" icon="palette"></svg-icon>
+        </div>
+        <app-button-fab [themeVariable]="'--secondary'" [icon]="'keyboard_arrow_right'" (isClicked)="nextTheme()"></app-button-fab>
     </header>
 
     <div class="theming" [ngClass]="{ hidden: !slidersVisibility }">
@@ -51,9 +55,9 @@
         <div class="title">Button - FAB</div>
         <div class="pure-material-card">
             <ng-container *ngFor="let themeVariable of displayedColors">
-                <app-button-fab [themeVariable]="themeVariable" [materialIcon]="'palette'"></app-button-fab>
+                <app-button-fab [themeVariable]="themeVariable" [icon]="'palette'"></app-button-fab>
             </ng-container>
-            <app-button-fab [themeVariable]="themeVariable" [materialIcon]="'palette'" [hasDisabled]="true"></app-button-fab>
+            <app-button-fab [themeVariable]="themeVariable" [icon]="'palette'" [hasDisabled]="true"></app-button-fab>
         </div>
 
         <div class="title">Checkbox</div>
@@ -191,3 +195,4 @@
 
     <div id="scrollbar-background"></div>
 </div>
+<svg-definitions></svg-definitions>
