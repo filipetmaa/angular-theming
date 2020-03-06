@@ -1,5 +1,6 @@
 <button class="pure-material-button-fab" [style]="componentStyle" [disabled]="hasDisabled" (click)="isClicked.emit()">
-    <i class="material-icons">
+    <!-- <i class="material-icons">
         {{materialIcon}}
-    </i>
+    </i> -->
+    <svg-icon [icon]="icon"></svg-icon>
 </button>

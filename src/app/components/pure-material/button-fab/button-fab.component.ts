@@ -11,7 +11,7 @@ export class ButtonFabComponent implements OnInit {
 
   @Input() themeVariable: string;
   @Input() hasDisabled: Boolean;
-  @Input() materialIcon: string;
+  @Input() icon: string;
 
   @Output() isClicked = new EventEmitter();
 
