@@ -1,7 +1,7 @@
 import { Theme } from './symbols';
 
-export const clientTheme: Theme = {
-  name: 'client',
+export const yellowDarkTheme: Theme = {
+  name: 'yellow-dark',
   properties: {
     '--primary': '250, 160, 0',
     '--primary-light': '255, 209, 72',
@@ -12,11 +12,14 @@ export const clientTheme: Theme = {
     '--secondary-light': '148, 223, 255',
     '--secondary-dark': '0, 126, 203',
     '--secondary-variant': '0, 34, 72',
+    '--test': '148, 181, 93',
+    '--test-light': '148, 181, 93',
+    '--test-dark': '148, 181, 93',
     '--on-secondary': '255, 255, 255',
-    '--background': '255, 255, 255',
-    '--on-background': '0, 0, 0',
-    '--surface': '255, 255, 255',
-    '--on-surface': '0, 0, 0',
+    '--background': '33, 33, 33',
+    '--on-background': '250, 250, 250',
+    '--surface': '55, 55, 55',
+    '--on-surface': '250, 250, 250',
     '--error': '176, 0, 32',
     '--on-error': '255, 255, 255'
   }
